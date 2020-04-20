@@ -2,7 +2,7 @@
 '''
 K L A S
 
-a proyect by Luis Quezada
+a project by Luis Quezada
 '''
 
 # Libraries
