@@ -2,6 +2,10 @@
 ### Diabetes Diagnosis AI
 Diagnosing *diabetes mellitus* based on patient's conditions with machine learning.
 
+<p align="center">
+  <img src="https://github.com/Lfquezada/Diabetes-Diagnosis/blob/master/src/assets/DDAI.gif" width="500">
+</p>
+
 Diabetes is a disease that occurs when your blood glucose is too high. Blood glucose is your main source of energy and comes from the food you eat. Insulin helps glucose, from food, get into your cells to be used for energy. Sometimes your body doesn’t make enough insulin or doesn’t use insulin well. Glucose then stays in your blood and doesn’t reach your cells. 
 
 Thus, a machine learning approach to diagnose *diabetes mellitus* was made. DD AI provides a friendly, yet profesional, user interface designed to aid health centers/clinics.
