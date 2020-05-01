@@ -1,5 +1,7 @@
 # Diabetes AI
-Diagnosing *diabetes mellitus* based on patient's conditions with machine learning.
+<div align="center">
+	Diagnosing *diabetes mellitus* based on patient's conditions with machine learning.
+</div>
 
 <p align="center">
   <img src="https://github.com/Lfquezada/Diabetes-Diagnosis/blob/master/src/assets/DDAI-animations.gif" width="500">
@@ -11,15 +13,17 @@ Thus, a machine learning approach to diagnose *diabetes mellitus* was made. DD A
 
 
 ## Inputs
-Input | Description
------------- | -------------
-Pregnancies | Number of times pregnant
-Glucose | Plasma glucose concentration in an oral glucose tolerance test
-Blood Pressure | Diastolic blood pressure (mm Hg)
-Skin Thickness | Triceps skin fold thickness (mm)
-Insulin | 2-Hour serum insulin (mu U/ml)
-BMI | Body mass index
-Age | Age (years)
+<div align="center">
+	Input | Description
+	------------ | -------------
+	Pregnancies | Number of times pregnant
+	Glucose | Plasma glucose concentration in an oral glucose tolerance test
+	Blood Pressure | Diastolic blood pressure (mm Hg)
+	Skin Thickness | Triceps skin fold thickness (mm)
+	Insulin | 2-Hour serum insulin (mu U/ml)
+	BMI | Body mass index
+	Age | Age (years)
+</div>
 
 ## Algorithm
 Based on preliminary data analisis made with [Klas](https://github.com/Lfquezada/Klas-Classifier), KNN (k=13) and SVM (Linear) machine learning algorithms were selected, as they demonstrated to fit best for the dataset. Aditionaly, an artificial neural network was trained. Based on these 3 models, DiabetesClassifier was created as an ensamble learning algorithm to predict whether a patient has diabetes.
