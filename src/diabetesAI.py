@@ -24,6 +24,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
 from keras.models import load_model
+import webbrowser
 
 
 class DiabetesClassifier():
@@ -100,15 +101,56 @@ def mainApp(reload):
     logoLabel = tk.Label(frame,image=ddaiLogo,pady=0, padx=0, borderwidth=0, highlightthickness=0)
     logoLabel.pack(side='top')
 
-    spacerBottom = tk.Label(frame,text='',font='Arial 60',bg=appBgColor)
-    spacerBottom.pack(side='bottom')
-    button = tk.Button(frame,text='Predict',width=20,height=1,fg=lightLetterColor,command=lambda: processInput())
-    button.pack(side='bottom')
+    button1 = tk.Button(frame,text='Info',width=20,height=2,fg=lightLetterColor,command=lambda: redirect('info'))
+    button1.place(relx=0.1,rely=0.6)
+
+    button2 = tk.Button(frame,text='Stats',width=20,height=2,fg=lightLetterColor,command=lambda: redirect('stats'))
+    button2.place(relx=0.41,rely=0.6)
+
+    button3 = tk.Button(frame,text='Predict',width=20,height=2,fg=lightLetterColor,command=lambda: redirect('predict'))
+    button3.place(relx=0.7,rely=0.6)
 
 
-def processInput():
-    testInput = [1.0, 199.0, 76.0, 43.0, 0.0, 42.9, 22.0]
-    print(classifier.predict(testInput))
+def redirect(page):
+    if page == 'info':
+        webbrowser.open('https://www.who.int/es/news-room/fact-sheets/detail/diabetes')
+
+    elif page == 'stats':
+        statsPage()
+
+    elif page == 'predict':
+        predictPage()
+
+
+def statsPage():
+    root.title('Stats')
+
+    global canvas, frame
+    canvas.destroy()
+    frame.destroy()
+
+    canvas = tk.Canvas(root,height=500,width=1000,bg=appBgColor)
+    canvas.pack()
+    frame = tk.Frame(root,bg=appBgColor)
+    frame.place(relx=0,rely=0,relwidth=1,relheight=1)
+
+
+def predictPage():
+    root.title('Predict')
+
+    global canvas, frame
+    canvas.destroy()
+    frame.destroy()
+
+    canvas = tk.Canvas(root,height=500,width=1000,bg=appBgColor)
+    canvas.pack()
+    frame = tk.Frame(root,bg=appBgColor)
+    frame.place(relx=0,rely=0,relwidth=1,relheight=1)
+
+
+def predict(userInput):
+    #userInput = [1.0, 199.0, 76.0, 43.0, 0.0, 42.9, 22.0]
+    return classifier.predict(testInput)
 
 
 '''
@@ -118,7 +160,7 @@ def processInput():
 '''
 
 root = tk.Tk()
-root.configure(background='white')
+root.configure(background='black')
 
 # preload assets
 ddaiLogo = tk.PhotoImage(file='assets/DDAI.png')
@@ -134,3 +176,7 @@ print(classifier.getAccuracy())
 # run home screen
 mainApp(reload=False)
 root.mainloop()
+
+
+
+
