@@ -101,14 +101,14 @@ def mainApp(reload):
     logoLabel = tk.Label(frame,image=ddaiLogo,pady=0, padx=0, borderwidth=0, highlightthickness=0)
     logoLabel.pack(side='top')
 
-    button1 = tk.Button(frame,text='Info',width=20,height=2,fg=lightLetterColor,command=lambda: redirect('info'))
-    button1.place(relx=0.1,rely=0.6)
+    button1 = tk.Button(frame,image=infoIcon,pady=0, padx=0, borderwidth=0, highlightthickness=0,command=lambda: redirect('info'))
+    button1.place(relx=0.1,rely=0.45)
 
-    button2 = tk.Button(frame,text='Stats',width=20,height=2,fg=lightLetterColor,command=lambda: redirect('stats'))
-    button2.place(relx=0.41,rely=0.6)
+    button2 = tk.Button(frame,image=statsIcon,pady=0, padx=0, borderwidth=0, highlightthickness=0,command=lambda: redirect('stats'))
+    button2.place(relx=0.41,rely=0.45)
 
-    button3 = tk.Button(frame,text='Predict',width=20,height=2,fg=lightLetterColor,command=lambda: redirect('predict'))
-    button3.place(relx=0.7,rely=0.6)
+    button3 = tk.Button(frame,image=predictIcon,pady=0, padx=0, borderwidth=0, highlightthickness=0,command=lambda: redirect('predict'))
+    button3.place(relx=0.7,rely=0.45)
 
 
 def redirect(page):
@@ -150,7 +150,7 @@ def predictPage():
 
 def predict(userInput):
     #userInput = [1.0, 199.0, 76.0, 43.0, 0.0, 42.9, 22.0]
-    return classifier.predict(testInput)
+    return classifier.predict(userInput)
 
 
 '''
@@ -164,6 +164,9 @@ root.configure(background='black')
 
 # preload assets
 ddaiLogo = tk.PhotoImage(file='assets/DDAI.png')
+infoIcon = tk.PhotoImage(file='assets/icon-info.png')
+statsIcon = tk.PhotoImage(file='assets/icon-stats.png')
+predictIcon = tk.PhotoImage(file='assets/icon-predict.png')
 
 # presets
 appBgColor = '#40739e'
@@ -171,7 +174,6 @@ lightLetterColor = '#3d3d3d'
 
 # Generate Model
 classifier = DiabetesClassifier()
-print(classifier.getAccuracy())
 
 # run home screen
 mainApp(reload=False)
