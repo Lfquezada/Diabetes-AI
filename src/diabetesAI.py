@@ -242,8 +242,7 @@ grey = '#363636'
 
 # Generate Model
 classifier = DiabetesClassifier(0.1)
-
-print(classifier.getTestData())
+#print(classifier.getTestData())
 
 # run home screen
 mainApp(reload=False)
