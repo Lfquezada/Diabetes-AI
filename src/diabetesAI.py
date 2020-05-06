@@ -101,14 +101,26 @@ def mainApp(reload):
     logoLabel = tk.Label(frame,image=ddaiLogo,pady=0, padx=0, borderwidth=0, highlightthickness=0)
     logoLabel.pack(side='top')
 
+
+    label1 = tk.Label(frame,text = ' INFORMATION ',font='Arial 16 bold',fg='#ffffff',bg=appBgColor)
+    label1.place(relx=0.135,rely=0.4)
+
+    label2 = tk.Label(frame,text = ' STATS ',font='Arial 16 bold',fg='#ffffff',bg=appBgColor)
+    label2.place(relx=0.465,rely=0.4)
+
+    label3 = tk.Label(frame,text = ' PREDICT ',font='Arial 16 bold',fg='#ffffff',bg=appBgColor)
+    label3.place(relx=0.755,rely=0.4)
+
+
     button1 = tk.Button(frame,image=infoIcon,pady=0, padx=0, borderwidth=0, highlightthickness=0,command=lambda: redirect('info'))
     button1.place(relx=0.1,rely=0.45)
 
     button2 = tk.Button(frame,image=statsIcon,pady=0, padx=0, borderwidth=0, highlightthickness=0,command=lambda: redirect('stats'))
-    button2.place(relx=0.41,rely=0.45)
+    button2.place(relx=0.4,rely=0.45)
 
     button3 = tk.Button(frame,image=predictIcon,pady=0, padx=0, borderwidth=0, highlightthickness=0,command=lambda: redirect('predict'))
     button3.place(relx=0.7,rely=0.45)
+
 
 
 def redirect(page):
@@ -134,6 +146,9 @@ def statsPage():
     frame = tk.Frame(root,bg=appBgColor)
     frame.place(relx=0,rely=0,relwidth=1,relheight=1)
 
+    goBackButton = tk.Button(frame,image=backIcon,pady=0, padx=0, borderwidth=0, highlightthickness=0,command=lambda: mainApp(reload=True))
+    goBackButton.place(relx=0.05,rely=0.07)
+
 
 def predictPage():
     root.title('Predict')
@@ -147,10 +162,57 @@ def predictPage():
     frame = tk.Frame(root,bg=appBgColor)
     frame.place(relx=0,rely=0,relwidth=1,relheight=1)
 
+    goBackButton = tk.Button(frame,image=backIcon,pady=0, padx=0, borderwidth=0, highlightthickness=0,command=lambda: mainApp(reload=True))
+    goBackButton.place(relx=0.05,rely=0.07)
 
-def predict(userInput):
-    #userInput = [1.0, 199.0, 76.0, 43.0, 0.0, 42.9, 22.0]
-    return classifier.predict(userInput)
+    pregnanciesEntry = tk.Entry(frame,fg=grey,bg='#ffffff',justify='center')
+    pregnanciesEntry.place(relx=0.15,rely=0.15,width=100)
+    label1 = tk.Label(frame,text = 'Pregnancies',font='Arial 14 bold',fg='#ffffff',bg=appBgColor)
+    label1.place(relx=0.28,rely=0.155)
+
+    glucoseEntry = tk.Entry(frame,fg=grey,bg='#ffffff',justify='center')
+    glucoseEntry.place(relx=0.15,rely=0.25,width=100)
+    label2 = tk.Label(frame,text = 'Glucose',font='Arial 14 bold',fg='#ffffff',bg=appBgColor)
+    label2.place(relx=0.28,rely=0.255)
+
+    bloodEntry = tk.Entry(frame,fg=grey,bg='#ffffff',justify='center')
+    bloodEntry.place(relx=0.15,rely=0.35,width=100)
+    label3 = tk.Label(frame,text = 'Blood Pressure (mmHg)',font='Arial 14 bold',fg='#ffffff',bg=appBgColor)
+    label3.place(relx=0.28,rely=0.355)
+
+    skinEntry = tk.Entry(frame,fg=grey,bg='#ffffff',justify='center')
+    skinEntry.place(relx=0.15,rely=0.45,width=100)
+    label4 = tk.Label(frame,text = 'Skin Thickness (mm)',font='Arial 14 bold',fg='#ffffff',bg=appBgColor)
+    label4.place(relx=0.28,rely=0.455)
+
+    insulinEntry = tk.Entry(frame,fg=grey,bg='#ffffff',justify='center')
+    insulinEntry.place(relx=0.15,rely=0.55,width=100)
+    label5 = tk.Label(frame,text = 'Insulin (mu U/ml)',font='Arial 14 bold',fg='#ffffff',bg=appBgColor)
+    label5.place(relx=0.28,rely=0.555)
+
+    bmiEntry = tk.Entry(frame,fg=grey,bg='#ffffff',justify='center')
+    bmiEntry.place(relx=0.15,rely=0.65,width=100)
+    label6 = tk.Label(frame,text = 'Body Mass Index',font='Arial 14 bold',fg='#ffffff',bg=appBgColor)
+    label6.place(relx=0.28,rely=0.655)
+
+    ageEntry = tk.Entry(frame,fg=grey,bg='#ffffff',justify='center')
+    ageEntry.place(relx=0.15,rely=0.75,width=100)
+    label7 = tk.Label(frame,text = 'Age (yrs)',font='Arial 14 bold',fg='#ffffff',bg=appBgColor)
+    label7.place(relx=0.28,rely=0.755)
+
+    global predLabel
+    predLabel = tk.Label(frame,image=squareIcon,font='Arial 18 bold',fg='#ffffff',bg=appBgColor)
+    predLabel.place(relx=0.7,rely=0.4)
+
+    predictButton = tk.Button(frame,text='  Predict  ',width=30,height=1,command=lambda: showPred([pregnanciesEntry.get(),glucoseEntry.get(),bloodEntry.get(),skinEntry.get(),insulinEntry.get(),bmiEntry.get(),ageEntry.get()]))
+    predictButton.place(relx=0.15,rely=0.85)
+
+
+def showPred(userInput):
+    if classifier.predict(userInput):
+        predLabel['image'] = positiveIcon
+    else:
+        predLabel['image'] = negativeIcon
 
 
 '''
@@ -167,13 +229,21 @@ ddaiLogo = tk.PhotoImage(file='assets/DDAI.png')
 infoIcon = tk.PhotoImage(file='assets/icon-info.png')
 statsIcon = tk.PhotoImage(file='assets/icon-stats.png')
 predictIcon = tk.PhotoImage(file='assets/icon-predict.png')
+backIcon = tk.PhotoImage(file='assets/icon-arrow.png')
+
+squareIcon = tk.PhotoImage(file='assets/icon-square.png')
+positiveIcon = tk.PhotoImage(file='assets/icon-positive.png')
+negativeIcon = tk.PhotoImage(file='assets/icon-negative.png')
 
 # presets
 appBgColor = '#40739e'
 lightLetterColor = '#3d3d3d'
+grey = '#363636'
 
 # Generate Model
-classifier = DiabetesClassifier()
+classifier = DiabetesClassifier(0.1)
+
+print(classifier.getTestData())
 
 # run home screen
 mainApp(reload=False)

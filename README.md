@@ -19,7 +19,7 @@ Input | Description
 ------------ | -------------
 Pregnancies | Number of times pregnant
 Glucose | Plasma glucose concentration in an oral glucose tolerance test
-Blood Pressure | Diastolic blood pressure (mm Hg)
+Blood Pressure | Diastolic blood pressure (mmHg)
 Skin Thickness | Triceps skin fold thickness (mm)
 Insulin | 2-Hour serum insulin (mu U/ml)
 BMI | Body mass index
