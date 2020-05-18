@@ -16,6 +16,7 @@ import tkinter as tk
 from tkinter import ttk
 from statistics import mode
 import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -141,13 +142,40 @@ def statsPage():
     canvas.destroy()
     frame.destroy()
 
-    canvas = tk.Canvas(root,height=500,width=1000,bg=appBgColor)
+    canvas = tk.Canvas(root,height=700,width=1300,bg=appBgColor)
     canvas.pack()
     frame = tk.Frame(root,bg=appBgColor)
-    frame.place(relx=0,rely=0,relwidth=1,relheight=1)
+    frame.place(relx=0.05,rely=0.15,relwidth=0.9,relheight=0.8)
 
-    goBackButton = tk.Button(frame,image=backIcon,pady=0, padx=0, borderwidth=0, highlightthickness=0,command=lambda: mainApp(reload=True))
+    goBackButton = tk.Button(canvas,image=backIcon,pady=0, padx=0, borderwidth=0, highlightthickness=0,command=lambda: mainApp(reload=True))
     goBackButton.place(relx=0.05,rely=0.07)
+
+    df = pd.read_csv('diabetes.csv')
+    figure1 = plt.Figure(figsize=(4,1), dpi=100)
+    ax1 = figure1.add_subplot(111)
+    bar1 = FigureCanvasTkAgg(figure1, frame)
+    bar1.get_tk_widget().pack(side=tk.LEFT, fill=tk.BOTH)
+    df1 = df[['Age','Outcome']].groupby('Age').sum()
+    df1.plot(kind='bar', legend=True, ax=ax1)
+    ax1.set_title('Diabetes occurrence by Age')
+
+    figure2 = plt.Figure(figsize=(4,1), dpi=100)
+    ax2 = figure2.add_subplot(111)
+    ax2.scatter(df['SkinThickness'],df['BMI'], color =appBgColor, s=10, edgecolors='#26445e', linewidth=0.5)
+    scatter2 = FigureCanvasTkAgg(figure2, frame) 
+    scatter2.get_tk_widget().pack(side=tk.LEFT, fill=tk.BOTH)
+    ax2.set_xlabel('SkinThickness (mm)')
+    ax2.set_ylabel('BMI')
+    ax2.set_title('SkinThickness Vs. BMI')
+
+    figure3 = plt.Figure(figsize=(4,1), dpi=100)
+    ax3 = figure3.add_subplot(111)
+    ax3.scatter(df['Glucose'],df['BMI'], color =appBgColor, s=10, edgecolors='#26445e', linewidth=0.5)
+    scatter3 = FigureCanvasTkAgg(figure3, frame) 
+    scatter3.get_tk_widget().pack(side=tk.LEFT, fill=tk.BOTH)
+    ax3.set_xlabel('Glucose')
+    ax3.set_ylabel('BMI')
+    ax3.set_title('Glucose Vs. BMI')
 
 
 def predictPage():
